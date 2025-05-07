@@ -8,7 +8,7 @@ const routes = {
     "/": { title: "Home", render: home },
     "/book": { title: "Book", render: book },
     "/login": { title: "Login", render: login },
-    "/behandliner": { title: "behandlinger", render: treatments },
+    "/behandlinger": { title: "behandlinger", render: treatments },
     "/kontakt": { title: "Kontakt", render: contact },
 };
 
