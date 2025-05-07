@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Cut</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-<nav>
-    <a href="/" data-link>Home</a>
-    <a href="/book" data-link>Book service</a>
-    <a href="/login" data-link>Login</a>
-</nav>
+<header>
+    <h1>CITY CUT</h1>
+    <nav>
+        <ul>
+            <li><a href="/behandlinger" data-link>BEHANDLINGER</a></li>
+            <li><a href="/kontakt" data-link>KONTAKT</a></li>
+            <li><a href="/book-tid" data-link>BOOK TID</a></li>
+            <li><a href="/log-in" data-link>LOG IN</a></li>
+        </ul>
+    </nav>
+</header>
 
-<main id="app"></main>
+<main id="main-content">
+    <!-- Indholdet her vil ændre sig baseret på brugerinteraktion -->
+    <div id="app"></div>
+</main>
+
+<footer>
+    <div class="footer-info">
+        <p>CITY CUT</p>
+        <p>Fælledvej 27</p>
+        <p>2200 København N</p>
+        <p>Tlf 35 35 38 38</p>
+    </div>
+    <div class="opening-hours">
+        <p>Åbningstider:</p>
+        <p>tirsdag: 10.00 - 17.00</p>
+        <p>onsdag: 10.00 - 16.00</p>
+        <p>torsdag: 10.00 - 17.00</p>
+        <p>fredag: 10.00 - 17.00</p>
+        <p>lørdag: 10.00 - 14.00</p>
+    </div>
+    <div class="footer-links">
+        <a href="#privatlivspolitik">Privatlivspolitik</a>
+        <a href="#cookie-politik">Cookie-politik</a>
+    </div>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
