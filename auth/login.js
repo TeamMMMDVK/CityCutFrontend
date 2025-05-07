@@ -1,4 +1,8 @@
-export default () => `
-    <h1>Login</h1>
-    <p>Consectetur in vitae totam nulla reprehenderit est earum debitis quam laboriosam.</p>
-`;
+export default function() {
+    return `
+        <section class="content-section">
+            <h2>Login</h2>
+            <p>Her oprettes login formular</p>
+        </section>
+    `;
+}
