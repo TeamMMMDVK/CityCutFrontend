@@ -3,7 +3,7 @@ import login from "./auth/login.js";
 import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
-import {renderRegisterForm} from "./auth/registration"
+import {renderRegisterForm} from "./auth/registration.js"
 
 const routes = {
     "/": { title: "Home", render: home },
