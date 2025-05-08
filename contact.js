@@ -1,8 +1,8 @@
 export default function() {
     return `
         <section class="content-section">
-            <h2>Login</h2>
-            <p>Her oprettes login formular</p>
+            <h2>Kontakt</h2>
+            <p>Kontaktinformation og formular.</p>
         </section>
     `;
 }
