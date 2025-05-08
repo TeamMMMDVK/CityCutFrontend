@@ -3,6 +3,7 @@ import login from "./auth/login.js";
 import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
+import {renderRegisterForm} from "./auth/registration"
 
 const routes = {
     "/": { title: "Home", render: home },
@@ -10,6 +11,7 @@ const routes = {
     "/login": { title: "Login", render: login },
     "/behandlinger": { title: "behandlinger", render: treatments },
     "/kontakt": { title: "Kontakt", render: contact },
+    "/opret": { title: "Opret bruger", render: () => { renderRegisterForm(); return ""}},
 };
 
 const app = document.getElementById("app")
