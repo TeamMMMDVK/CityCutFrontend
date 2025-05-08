@@ -13,32 +13,32 @@ async function fetchAndRenderTreatmentsFromDB() {
     try {
         const response = await fetch(urlGetAllTreatmentsFromDB)
         const data = await response.json();
-        console.log(data, "Data.json")
-        console.log(response, "response")
-        container.innerHTML =
-        `
-        <table>
-            <thead>
-                <tr>
-                    <th>Treatment Title</th>
-                    <th>Treatment Description</th>
-                    <th>Treatment Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${data.forEach(t => `
+        console.log(data, "data")
+
+        container.innerHTML = `
+            <table>
+                <thead>
                     <tr>
-                        <td>${t.title}</td>
-                        <td>${t.description}</td>
-                        <td>${t.price}</td>
+                        <th>Behandling</th>
+                        <th>Beskrivelse</th>
+                        <th>Pris</th>
                     </tr>
-                `).join("")}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    ${data.map(t => `
+                        <tr>
+                            <td>${t.title}</td>
+                            <td>${t.description}</td>
+                            <td>${t.price} DKK</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
         `;
+
     } catch(err) {
         container.innerHTML= `<p>Something went wrong fetching the treatments.</p>`
-        console.log(err)
+        console.log(err, "Error")
     }
 
 }
