@@ -68,3 +68,43 @@ footer {
     display: block;
     margin-bottom: 5px;
 }
+/*
+TREATMENT CONTAINER CSS
+ */
+#treatmentsContainer {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1rem;
+    background-color: #fefefe;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    overflow-x: auto;
+}
+
+#treatmentsContainer table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+#treatmentsContainer thead {
+    background-color: #333;
+    color: #fff;
+}
+
+#treatmentsContainer th,
+#treatmentsContainer td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#treatmentsContainer tr:hover {
+    background-color: #f5f5f5;
+}
+
+#treatmentsContainer td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
