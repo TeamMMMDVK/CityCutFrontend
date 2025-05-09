@@ -5,7 +5,7 @@ export default () => {
     <p>Vita formosa est, et ad plenissimam meretur fruendum..</p>
     <div id="treatmentsContainer">Loading treatments...</div>`;
 };
-const urlGetAllTreatmentsFromDB = "http://localhost:8080/api/v1/treatment/treatments"
+const urlGetAllTreatmentsFromDB = "http://localhost:8080/api/v1/treatments"
 
 async function fetchAndRenderTreatmentsFromDB() {
     const container = document.getElementById("treatmentsContainer")
