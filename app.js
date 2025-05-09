@@ -29,7 +29,10 @@ function router() {
     if (view) {
         document.title = view.title;
         // Her indsættes det dynamiske indhold
-        app.innerHTML = view.render();
+        const result = view.render();
+        if (typeof result === "string" && result.trim()) {
+            app.innerHTML = result; // only set innerHTML if something is returned
+        }
     } else {
         history.replaceState("", "", "/");
         router();
