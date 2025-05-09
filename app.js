@@ -3,6 +3,7 @@ import login from "./auth/login.js";
 import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
+import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 
 const routes = {
     "/": { title: "Home", render: home },
@@ -10,6 +11,14 @@ const routes = {
     "/login": { title: "Login", render: login },
     "/behandlinger": { title: "behandlinger", render: treatments },
     "/kontakt": { title: "Kontakt", render: contact },
+    "/opret": {
+        title: "Opret bruger", render: () => {
+            const html = renderRegisterForm();
+            setTimeout(() => setupRegisterFormEvents(), 0);//sikrer at DOM'en er klar
+            return html;
+        }
+    },
+
 };
 
 const app = document.getElementById("app")
@@ -20,7 +29,10 @@ function router() {
     if (view) {
         document.title = view.title;
         // Her indsættes det dynamiske indhold
-        app.innerHTML = view.render();
+        const result = view.render();
+        if (typeof result === "string" && result.trim()) {
+            app.innerHTML = result; // only set innerHTML if something is returned
+        }
     } else {
         history.replaceState("", "", "/");
         router();
