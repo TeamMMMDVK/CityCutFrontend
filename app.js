@@ -4,6 +4,7 @@ import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
+import renderAddNewTreatment from "./booking/addNewTreatment.js";
 
 const routes = {
     "/": { title: "Home", render: home },
@@ -18,7 +19,7 @@ const routes = {
             return html;
         }
     },
-
+    "/treatments/add": { title: "Add treatment", render: () => { renderAddNewTreatment(); return "" }}
 };
 
 const app = document.getElementById("app")
