@@ -1,5 +1,5 @@
 import book from "./booking/book.js";
-import {renderLoginForm} from "./auth/login.js";
+import {renderLoginForm, setupLoginFormEvents} from "./auth/login.js";
 import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
@@ -12,6 +12,7 @@ const routes = {
     "/login": {
         title: "Login", render: () => {
             const html = renderLoginForm()
+            setTimeout(() => setupLoginFormEvents(), 0) //sikrer at DOM'en er klar
             return html
         }
     },
