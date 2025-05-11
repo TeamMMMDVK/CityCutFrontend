@@ -1,8 +1,18 @@
-export default function() {
+console.log("Her er vi i login.js")
+
+export function renderLoginForm() {
+
     return `
-        <section class="content-section">
+        <form id="loginForm">
             <h2>Login</h2>
-            <p>Her oprettes login formular</p>
-        </section>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">Adgangskode:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Log ind</button>
+                    
+        </form>
     `;
 }
+

@@ -1,5 +1,5 @@
 import book from "./booking/book.js";
-import login from "./auth/login.js";
+import {renderLoginForm} from "./auth/login.js";
 import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
@@ -7,11 +7,16 @@ import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.j
 import renderAddNewTreatment from "./booking/addNewTreatment.js";
 
 const routes = {
-    "/": { title: "Home", render: home },
-    "/book": { title: "Book", render: book },
-    "/login": { title: "Login", render: login },
-    "/behandlinger": { title: "behandlinger", render: treatments },
-    "/kontakt": { title: "Kontakt", render: contact },
+    "/": {title: "Home", render: home},
+    "/book": {title: "Book", render: book},
+    "/login": {
+        title: "Login", render: () => {
+            const html = renderLoginForm()
+            return html
+        }
+    },
+    "/behandlinger": {title: "behandlinger", render: treatments},
+    "/kontakt": {title: "Kontakt", render: contact},
     "/opret": {
         title: "Opret bruger", render: () => {
             const html = renderRegisterForm();
@@ -19,7 +24,12 @@ const routes = {
             return html;
         }
     },
-    "/treatments/add": { title: "Add treatment", render: () => { renderAddNewTreatment(); return "" }}
+    "/treatments/add": {
+        title: "Add treatment", render: () => {
+            renderAddNewTreatment();
+            return ""
+        }
+    }
 };
 
 const app = document.getElementById("app")
