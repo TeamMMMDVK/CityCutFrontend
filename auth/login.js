@@ -11,6 +11,7 @@ export function renderLoginForm() {
             <label for="password">Adgangskode:</label>
             <input type="password" id="password" name="password" required><br>
             <button type="submit">Log ind</button>
+            <div id="output"></div>
                     
         </form>
     `;
@@ -22,16 +23,19 @@ export function setupLoginFormEvents() {
     form.addEventListener("submit", async function (event) {
             event.preventDefault()
 
-            const loginRequest = {
-                email: document.getElementById("email").value,
-                password: document.getElementById("password").value,
-            }
+        const email = document.getElementById("email").value
+        const password = document.getElementById("password").value
+        const output = document.getElementById("output")
+
+            const loginRequest = { email , password }
+
             try {
                 const response = await fetch('http://localhost:8081/api/v1/user/login', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({email, password})
+                    body: JSON.stringify(loginRequest)
                 });
+
                 if (response.ok) {
                     const data = await response.json();
                     sessionStorage.setItem('token', data.token);
@@ -40,7 +44,7 @@ export function setupLoginFormEvents() {
                     output.textContent = "Login fejlede.";
                 }
             } catch (error) {
-                alert("Databasefejl: " + error.message);
+                output.textContent = "Databasefejl: " + error.message;
             }
         }
     )
