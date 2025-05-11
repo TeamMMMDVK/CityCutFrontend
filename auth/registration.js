@@ -1,6 +1,6 @@
 console.log("Her er vi i register.js")
 
-// registration.js
+// funktionen renderRegisterForm genererer HTML-koden til registreringsformularen, som en lang streng
 export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
     const isAdmin = currentUserRole === "ROLE_ADMIN";
 
@@ -16,7 +16,8 @@ export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
 
             <label for="password">Adgangskode:</label>
             <input type="password" id="password" name="password" required><br>
-
+            
+            
             ${isAdmin ? `
                 <label for="role">Rolle:</label>
                 <select id="role" name="role">
@@ -36,7 +37,7 @@ export function setupRegisterFormEvents(currentUserRole = "ROLE_CUSTOMER") {
     const messageDiv = document.getElementById("message");
 
     form.addEventListener("submit", async function (event) {
-        event.preventDefault();
+        event.preventDefault(); //forhindre den normale formularindsendelse som ville reloade siden
 
         const roleInput = document.getElementById("role");
 
@@ -45,10 +46,11 @@ export function setupRegisterFormEvents(currentUserRole = "ROLE_CUSTOMER") {
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
             role: currentUserRole === "ROLE_ADMIN" && roleInput ? roleInput.value : "ROLE_CUSTOMER"
+            //Hvis brugeren er ADMIN og feltet "role" eksisterer, så skal den valgte rolle bruges...ellers default ROLE_CUSTOMER
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/v1/user/register", {
+            const response = await fetch("http://localhost:8081/api/v1/user/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
