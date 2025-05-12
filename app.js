@@ -5,10 +5,11 @@ import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import renderAddNewTreatment from "./booking/addNewTreatment.js";
+import calendar from "./booking/calendar.js";
 
 const routes = {
-    "/": {title: "Home", render: home},
-    "/book": {title: "Book", render: book},
+    "/": { title: "Home", render: home },
+    "/book": { title: "Book", render: book },
     "/login": {
         title: "Login", render: () => {
             const html = renderLoginForm()
@@ -16,8 +17,9 @@ const routes = {
             return html
         }
     },
-    "/behandlinger": {title: "behandlinger", render: treatments},
-    "/kontakt": {title: "Kontakt", render: contact},
+    "/behandlinger": { title: "behandlinger", render: treatments },
+    "/calendar": { title: "calendar", render: calendar },
+    "/kontakt": { title: "Kontakt", render: contact },
     "/opret": {
         title: "Opret bruger", render: () => {
             const role = sessionStorage.getItem("role") //rolle tages fra session storage
@@ -38,46 +40,10 @@ const routes = {
 
 const app = document.getElementById("app")
 
-function updateMenu() {
-    const role = sessionStorage.getItem("role");
-    const token = sessionStorage.getItem("token");
-    const isAdmin = role === "ROLE_ADMIN";
-
-    const adminMenu = document.getElementById("adminMenu");
-    const loginLink = document.getElementById("loginLink");
-
-    if (adminMenu) adminMenu.style.display = isAdmin ? "inline" : "none";
-    if (loginLink) loginLink.textContent = token ? "Log ud" : "Login";
-
-    if (token && loginLink) {
-        loginLink.onclick = (e) => {
-            e.preventDefault();
-            sessionStorage.clear();
-            alert("Du er nu logget ud.");
-            history.pushState("", "", "/");
-            router();
-        };
-    }
-}
-
 function router() {
     let view = routes[location.pathname];
 
     if (view) {
-
-        // Adgangskontrol
-        if (view.requiresAuth) {
-            const token = sessionStorage.getItem("token");
-            const role = sessionStorage.getItem("role");
-
-            if (!token || (view.requiredRole && role !== view.requiredRole)) {
-                alert("Du har ikke adgang til denne side.");
-                history.pushState("", "", "/login");
-                router();
-                return;
-            }
-        }
-
         document.title = view.title;
         // Her indsættes det dynamiske indhold
         const result = view.render();
@@ -101,7 +67,4 @@ window.addEventListener("click", e => {
 
 // Update router
 window.addEventListener("popstate", router);
-window.addEventListener("DOMContentLoaded", () => {
-    updateMenu();
-    router();
-})
+window.addEventListener("DOMContentLoaded", router);

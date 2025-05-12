@@ -68,6 +68,30 @@ footer {
     display: block;
     margin-bottom: 5px;
 }
+
+#calendar {
+    max-width: 400px;
+    margin: 20px auto;
+    height: auto;
+}
+
+.fc {
+    height: auto !important;
+}
+
+.fc-daygrid-day {
+    padding: 0 !important;
+}
+
+.fc-daygrid-day-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
 /*
 TREATMENT CONTAINER CSS
  */
