@@ -38,10 +38,46 @@ const routes = {
 
 const app = document.getElementById("app")
 
+function updateMenu() {
+    const role = sessionStorage.getItem("role");
+    const token = sessionStorage.getItem("token");
+    const isAdmin = role === "ROLE_ADMIN";
+
+    const adminMenu = document.getElementById("adminMenu");
+    const loginLink = document.getElementById("loginLink");
+
+    if (adminMenu) adminMenu.style.display = isAdmin ? "inline" : "none";
+    if (loginLink) loginLink.textContent = token ? "Log ud" : "Login";
+
+    if (token && loginLink) {
+        loginLink.onclick = (e) => {
+            e.preventDefault();
+            sessionStorage.clear();
+            alert("Du er nu logget ud.");
+            history.pushState("", "", "/");
+            router();
+        };
+    }
+}
+
 function router() {
     let view = routes[location.pathname];
 
     if (view) {
+
+        // Adgangskontrol
+        if (view.requiresAuth) {
+            const token = sessionStorage.getItem("token");
+            const role = sessionStorage.getItem("role");
+
+            if (!token || (view.requiredRole && role !== view.requiredRole)) {
+                alert("Du har ikke adgang til denne side.");
+                history.pushState("", "", "/login");
+                router();
+                return;
+            }
+        }
+
         document.title = view.title;
         // Her indsættes det dynamiske indhold
         const result = view.render();
@@ -52,7 +88,7 @@ function router() {
         history.replaceState("", "", "/");
         router();
     }
-};
+}
 
 // Handle navigation
 window.addEventListener("click", e => {
@@ -65,4 +101,7 @@ window.addEventListener("click", e => {
 
 // Update router
 window.addEventListener("popstate", router);
-window.addEventListener("DOMContentLoaded", router);
+window.addEventListener("DOMContentLoaded", () => {
+    updateMenu();
+    router();
+})
