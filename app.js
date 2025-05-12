@@ -6,6 +6,9 @@ import contact from "./contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import renderAddNewTreatment from "./booking/addNewTreatment.js";
 
+const role = sessionStorage.getItem("role") //rolle tages fra session storage
+const currentUserRole = role ? role : "ROLE_CUSTOMER" //hvis bruger endnu ikke er logget ind, dvs. ingen rolle er gemt, så er default rolle "customer"
+
 const routes = {
     "/": {title: "Home", render: home},
     "/book": {title: "Book", render: book},
@@ -20,8 +23,8 @@ const routes = {
     "/kontakt": {title: "Kontakt", render: contact},
     "/opret": {
         title: "Opret bruger", render: () => {
-            const html = renderRegisterForm();
-            setTimeout(() => setupRegisterFormEvents(), 0);//sikrer at DOM'en er klar
+            const html = renderRegisterForm(currentUserRole);
+            setTimeout(() => setupRegisterFormEvents(currentUserRole), 0);//sikrer at DOM'en er klar
             return html;
         }
     },

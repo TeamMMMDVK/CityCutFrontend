@@ -38,8 +38,9 @@ export function setupLoginFormEvents() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    sessionStorage.setItem('token', data.token);
-                    output.textContent = "Login lykkedes. Token gemt.";
+                    sessionStorage.setItem('token', data.token); //Her gemmes token og rolle i session storage
+                    sessionStorage.setItem("role",data.role)
+                    output.textContent = "Login lykkedes. Token og rolle er gemt.";
                 } else {
                     output.textContent = "Login fejlede.";
                 }

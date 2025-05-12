@@ -1,7 +1,7 @@
 console.log("Her er vi i register.js")
 
 // funktionen renderRegisterForm genererer HTML-koden til registreringsformularen, som en lang streng
-export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
+export function renderRegisterForm(currentUserRole) {
     const isAdmin = currentUserRole === "ROLE_ADMIN";
 
     return `
@@ -32,7 +32,7 @@ export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
     `;
 }
 
-export function setupRegisterFormEvents(currentUserRole = "ROLE_CUSTOMER") {
+export function setupRegisterFormEvents(currentUserRole) {
     const form = document.getElementById("registerForm");
     const messageDiv = document.getElementById("message");
 
