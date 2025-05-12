@@ -4,12 +4,12 @@ import home from "./home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
-import renderAddNewTreatment from "./booking/addNewTreatment.js";
+import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
 
 const routes = {
-    "/": { title: "Home", render: home },
-    "/book": { title: "Book", render: book },
+    "/": {title: "Home", render: home},
+    "/book": {title: "Book", render: book},
     "/login": {
         title: "Login", render: () => {
             const html = renderLoginForm()
@@ -17,9 +17,9 @@ const routes = {
             return html
         }
     },
-    "/behandlinger": { title: "behandlinger", render: treatments },
-    "/calendar": { title: "calendar", render: calendar },
-    "/kontakt": { title: "Kontakt", render: contact },
+    "/behandlinger": {title: "behandlinger", render: treatments},
+    "/calendar": {title: "calendar", render: calendar},
+    "/kontakt": {title: "Kontakt", render: contact},
     "/opret": {
         title: "Opret bruger", render: () => {
             const role = sessionStorage.getItem("role") //rolle tages fra session storage
@@ -30,10 +30,9 @@ const routes = {
             return html;
         }
     },
-    "/treatments/add": {
-        title: "Add treatment", render: () => {
-            renderAddNewTreatment();
-            return ""
+    "/admin": {
+        title: "Admin", render: () => {
+            return admin()
         }
     }
 };
