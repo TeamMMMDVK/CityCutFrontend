@@ -5,12 +5,14 @@ import treatments from "./booking/treatments.js"
 import contact from "./contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import renderAddNewTreatment from "./booking/addNewTreatment.js";
+import calendar from "./booking/calendar.js";
 
 const routes = {
     "/": { title: "Home", render: home },
     "/book": { title: "Book", render: book },
     "/login": { title: "Login", render: login },
     "/behandlinger": { title: "behandlinger", render: treatments },
+    "/calendar": { title: "calendar", render: calendar },
     "/kontakt": { title: "Kontakt", render: contact },
     "/opret": {
         title: "Opret bruger", render: () => {
