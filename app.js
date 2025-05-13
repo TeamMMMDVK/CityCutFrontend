@@ -40,14 +40,38 @@ const routes = {
 const app = document.getElementById("app")
 
 function router() {
-    let view = routes[location.pathname];
+    const path = location.pathname;
+    const view = routes[path];
+
+    const token = sessionStorage.getItem("token");
+    const role = sessionStorage.getItem("role");
+
+    // Beskyttede ruter med rollekrav
+    const protectedRoutes = {
+        "/admin": ["ROLE_ADMIN"],
+        "/book": ["ROLE_ADMIN", "ROLE_CUSTOMER"]
+        // Tilføj evt. flere beskyttede ruter her
+    };
+
+    if (protectedRoutes[path]) {
+        if (!token) {
+            history.replaceState("", "", "/login");
+            router(); // Kald router igen for at vise login-siden
+            return;
+        }
+        if (!protectedRoutes[path].includes(role)) {
+            alert("Du har ikke adgang til denne side.");
+            history.replaceState("", "", "/");
+            router();
+            return;
+        }
+    }
 
     if (view) {
         document.title = view.title;
-        // Her indsættes det dynamiske indhold
         const result = view.render();
         if (typeof result === "string" && result.trim()) {
-            app.innerHTML = result; // only set innerHTML if something is returned
+            app.innerHTML = result;
         }
     } else {
         history.replaceState("", "", "/");
