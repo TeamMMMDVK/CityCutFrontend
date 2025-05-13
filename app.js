@@ -88,6 +88,27 @@ window.addEventListener("click", e => {
     }
 });
 
+// LogOut
+function logout() {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+
+    alert("Du er nu logget ud.");
+    history.pushState("", "", "/");
+    router(); // Opdater visningen
+}
+
 // Update router
 window.addEventListener("popstate", router);
 window.addEventListener("DOMContentLoaded", router);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutLink = document.getElementById("logout-link");
+    if (logoutLink) {
+        logoutLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            logout();
+        });
+    }
+});
+
