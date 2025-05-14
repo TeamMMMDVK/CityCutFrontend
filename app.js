@@ -79,6 +79,8 @@ function router() {
     }
 }
 
+window.spaRouter = router //gør routeren global, så vi kan bruge den til at omdirigere korrekt i de andre js filer
+
 // Handle navigation
 window.addEventListener("click", e => {
     if (e.target.matches("[data-link]")) {
@@ -111,4 +113,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 

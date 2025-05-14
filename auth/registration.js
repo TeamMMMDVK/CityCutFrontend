@@ -67,6 +67,8 @@ export function setupRegisterFormEvents(currentUserRole) {
             if (response.status === 201) {
                 alert("Så er du oprettet i systemet og kan logge ind");
                 form.reset();
+                history.pushState("", "", "/login"); // redirect til loginside
+                window.spaRouter(); // kalder routeren i app.js og opdaterer visning
             } else if (response.statusText === 409) {
                 alert("Bruger med denne email findes allerede!")
             } else {

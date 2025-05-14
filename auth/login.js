@@ -40,7 +40,10 @@ export function setupLoginFormEvents() {
                     const data = await response.json();
                     sessionStorage.setItem('token', data.token); //Her gemmes token og rolle i session storage
                     sessionStorage.setItem("role",data.role)
-                    output.textContent = "Login lykkedes. Token og rolle er gemt.";
+                    alert("Velkommen du er nu logget ind")
+                    history.pushState("", "", "/"); // Skift til HOME
+                    window.spaRouter(); // Kalder routeren i app.js, som opdaterer visningen
+                    console.log("Login lykkedes. Token og rolle er gemt")
                 } else {
                     output.textContent = "Login fejlede.";
                 }
