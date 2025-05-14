@@ -15,7 +15,7 @@ export function renderRegisterForm(currentUserRole) {
             <input type="email" id="email" name="email" required><br>
 
             <label for="password">Adgangskode:</label>
-            <input type="password" id="password" name="password" required><br>
+            <input type="password" id="password" name="password" required minlength="8"><br>
             
             
             ${isAdmin ? `
@@ -48,6 +48,12 @@ export function setupRegisterFormEvents(currentUserRole) {
             role: currentUserRole === "ROLE_ADMIN" && roleInput ? roleInput.value : "ROLE_CUSTOMER"
             //Hvis brugeren er ADMIN og feltet "role" eksisterer, så skal den valgte rolle bruges...ellers default ROLE_CUSTOMER
         };
+
+        if (user.password.length < 8) {
+            messageDiv.textContent = "Adgangskoden skal være mindst 8 tegn lang";
+            messageDiv.style.color = "red";
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:8081/api/v1/user/register", {
