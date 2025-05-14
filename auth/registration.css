@@ -1,0 +1,77 @@
+/* REGISTRATION FORM STYLING */
+#registerForm {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+#registerForm h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+#registerForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+#registerForm input,
+#registerForm select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#registerForm button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #000;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#registerForm button:hover {
+    background-color: #333;
+}
+
+#message {
+    margin-top: 1rem;
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+    #registerForm {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    #registerForm h2 {
+        font-size: 1.5rem;
+    }
+
+    #registerForm input,
+    #registerForm select,
+    #registerForm button {
+        font-size: 0.95rem;
+        padding: 0.65rem;
+    }
+}

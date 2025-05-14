@@ -1,7 +1,7 @@
 console.log("Her er vi i register.js")
 
-// registration.js
-export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
+// funktionen renderRegisterForm genererer HTML-koden til registreringsformularen, som en lang streng
+export function renderRegisterForm(currentUserRole) {
     const isAdmin = currentUserRole === "ROLE_ADMIN";
 
     return `
@@ -16,7 +16,8 @@ export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
 
             <label for="password">Adgangskode:</label>
             <input type="password" id="password" name="password" required><br>
-
+            
+            
             ${isAdmin ? `
                 <label for="role">Rolle:</label>
                 <select id="role" name="role">
@@ -31,12 +32,12 @@ export function renderRegisterForm(currentUserRole = "ROLE_CUSTOMER") {
     `;
 }
 
-export function setupRegisterFormEvents(currentUserRole = "ROLE_CUSTOMER") {
+export function setupRegisterFormEvents(currentUserRole) {
     const form = document.getElementById("registerForm");
     const messageDiv = document.getElementById("message");
 
     form.addEventListener("submit", async function (event) {
-        event.preventDefault();
+        event.preventDefault(); //forhindre den normale formularindsendelse som ville reloade siden
 
         const roleInput = document.getElementById("role");
 
@@ -45,27 +46,28 @@ export function setupRegisterFormEvents(currentUserRole = "ROLE_CUSTOMER") {
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
             role: currentUserRole === "ROLE_ADMIN" && roleInput ? roleInput.value : "ROLE_CUSTOMER"
+            //Hvis brugeren er ADMIN og feltet "role" eksisterer, så skal den valgte rolle bruges...ellers default ROLE_CUSTOMER
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/v1/user/register", {
+            const response = await fetch("http://localhost:8081/api/v1/user/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(user)
+                body: JSON.stringify(user) //User objektet konverteres til JSON
             });
 
             const message = await response.text();
 
             if (response.status === 201) {
-                messageDiv.innerText = "Bruger oprettet!";
-                messageDiv.style.color = "green";
+                alert("Så er du oprettet i systemet og kan logge ind");
                 form.reset();
+            } else if (response.statusText === 409) {
+                alert("Bruger med denne email findes allerede!")
             } else {
-                messageDiv.innerText = "Fejl: " + message;
-                messageDiv.style.color = "red";
+               alert("Fejl: " + message);
             }
         } catch (error) {
-            messageDiv.innerText = "Netværksfejl: " + error.message;
+            alert("Netværksfejl: " + error.message);
         }
     });
 }
