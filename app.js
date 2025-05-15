@@ -39,12 +39,15 @@ const routes = {
 
 const app = document.getElementById("app")
 
+
+
+
 function router() {
     const path = location.pathname;
     const view = routes[path];
 
     const token = sessionStorage.getItem("token");
-    const role = sessionStorage.getItem("role");
+    const role = getRoleFromToken()
 
     // Beskyttede ruter med rollekrav
     const protectedRoutes = {
@@ -79,6 +82,8 @@ function router() {
     }
 }
 
+window.spaRouter = router //gør routeren global, så vi kan bruge den til at omdirigere korrekt i de andre js filer
+
 // Handle navigation
 window.addEventListener("click", e => {
     if (e.target.matches("[data-link]")) {
@@ -98,6 +103,21 @@ function logout() {
     router(); // Opdater visningen
 }
 
+//få rolle fra token
+function getRoleFromToken() {
+    const token = sessionStorage.getItem("token");
+    if (!token) return null;
+
+    const payload = token.split('.')[1];
+    try {
+        const decoded = JSON.parse(atob(payload));
+        return decoded.role;
+    } catch (e) {
+        console.error("Token decoding failed", e);
+        return null;
+    }
+}
+
 // Update router
 window.addEventListener("popstate", router);
 window.addEventListener("DOMContentLoaded", router);
@@ -111,4 +131,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 
