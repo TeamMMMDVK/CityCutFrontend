@@ -6,8 +6,8 @@ import contact from "./misc/contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
-import privacyPolicy from "./misc/privacyPolicy";
-import cookiePolicy from "./misc/cookiePolicy";
+import privacyPolicy from "./misc/privacyPolicy.js";
+import cookiePolicy from "./misc/cookiePolicy.js";
 
 const routes = {
     "/": {title: "Home", render: home},
@@ -36,7 +36,7 @@ const routes = {
         title: "Admin", render: () => {
             return admin()
         }
-    }
+    },
     "/privatlivspolitik": {title: "privatlivspolitik", render: privacyPolicy},
     "/cookie-politik": {title: "cookie-politik", render: cookiePolicy}
 
@@ -98,7 +98,6 @@ window.addEventListener("click", e => {
 // LogOut
 function logout() {
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("role");
 
     alert("Du er nu logget ud.");
     history.pushState("", "", "/");
