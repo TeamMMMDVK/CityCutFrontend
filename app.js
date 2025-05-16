@@ -6,9 +6,11 @@ import contact from "./contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
+import renderTimeslots from "./booking/timeslots.js";
 
 const routes = {
     "/": {title: "Home", render: home},
+    "/timeslots": {title: "Book timeslot", render: renderTimeslots},
     "/book": {title: "Book", render: book},
     "/login": {
         title: "Login", render: () => {
@@ -38,8 +40,6 @@ const routes = {
 };
 
 const app = document.getElementById("app")
-
-
 
 
 function router() {
