@@ -1,11 +1,13 @@
 import book from "./booking/book.js";
 import {renderLoginForm, setupLoginFormEvents} from "./auth/login.js";
-import home from "./home.js"
+import home from "./misc/home.js"
 import treatments from "./booking/treatments.js"
-import contact from "./contact.js"
+import contact from "./misc/contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
+import privacyPolicy from "./misc/privacyPolicy";
+import cookiePolicy from "./misc/cookiePolicy";
 
 const routes = {
     "/": {title: "Home", render: home},
@@ -35,12 +37,12 @@ const routes = {
             return admin()
         }
     }
+    "/privatlivspolitik": {title: "privatlivspolitik", render: privacyPolicy},
+    "/cookie-politik": {title: "cookie-politik", render: cookiePolicy}
+
 };
 
 const app = document.getElementById("app")
-
-
-
 
 function router() {
     const path = location.pathname;
