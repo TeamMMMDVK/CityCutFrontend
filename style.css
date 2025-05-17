@@ -132,3 +132,45 @@ TREATMENT CONTAINER CSS
     text-align: right;
     font-weight: bold;
 }
+/*
+TIMESLOT SELECTION
+ */
+#bookingContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Reduced gap between cards */
+    align-items: center; /* Keep cards centered horizontally */
+}
+
+.timeslot {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 12px; /* Reduced padding */
+    width: 280px; /* Adjust width if you want tighter fit */
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.timeslot:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.timeslot h3 {
+    margin: 0 0 6px; /* Reduced margin */
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.timeslot p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+.timeslot.selected {
+    background-color: #cce5ff;
+    border: 2px solid #3399ff;
+}
