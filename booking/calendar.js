@@ -3,14 +3,15 @@ export default function calendar() {
 
     setTimeout(() => {
         const calendarEl = document.getElementById('calendar');
-        if (!calendarEl) return;
+        if (!calendarEl) return console.warn('Calendar element not found');
 
-        if (window.FullCalendar) {
-            renderCalendar(calendarEl);
-        } else {
+        const init = () => renderCalendar(calendarEl);
+
+        if (window.FullCalendar) init();
+        else {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js';
-            script.onload = () => renderCalendar(calendarEl);
+            script.onload = init;
             document.head.appendChild(script);
         }
     }, 0);
@@ -18,28 +19,52 @@ export default function calendar() {
     return html;
 }
 
-function renderCalendar(calendarEl) {
-    const data = [
-        {date: '2025-05-10', available: true},
-        {date: '2025-05-12', available: false},
-        {date: '2025-05-15', available: true},
-        {date: '2025-05-18', available: false}
-    ];
+async function fetchAvailability(dates) {
+    const stylistId = localStorage.getItem('stylistId') || 1;
+    const treatmentIds = JSON.parse(localStorage.getItem('treatmentIds') || '[1,2]');
 
+    try {
+        const res = await fetch(`http://localhost:8081/v1/calendar/availability?stylist=${stylistId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dates, treatmentIds }),
+        });
+        const data = await res.json();
+        return Array.isArray(data) ? data : data.data || [];
+    } catch {
+        return [];
+    }
+}
+
+function getDateRange(start, end) {
+    const dates = [];
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        dates.push(d.toISOString().slice(0, 10));
+    }
+    return dates;
+}
+
+function onDateSelected(info) {
+    localStorage.setItem('date', info.dateStr);
+    window.location = "/timeslots";
+}
+
+function renderCalendar(calendarEl) {
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         height: 'auto',
-        contentHeight: 'auto',
-        expandRows: false,
-        headerToolbar: {left: 'prev,next today', center: 'title', right: ''},
-        events: data.map(d => ({
-            start: d.date,
-            display: 'background',
-            backgroundColor: d.available ? 'green' : 'red',
-            allDay: true
-        })),
-        dateClick: info => alert(`You clicked on ${info.dateStr}`)
-    });
+        headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
+        dateClick: onDateSelected,
+        datesSet: async (info) => {
+            const dates = getDateRange(info.start, info.end);
+            const availability = await fetchAvailability(dates);
 
+            calendar.removeAllEvents();
+            availability.forEach(date => {
+                const color = date.status === 'FULL' ? 'red' : date.status === 'PARTIAL' ? 'orange' : date.status === 'AVAILABLE' ? 'green' : 'gray';
+                calendar.addEvent({ start: date.date, display: 'background', color, allDay: true });
+            });
+        }
+    });
     calendar.render();
 }
