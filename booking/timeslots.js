@@ -26,7 +26,7 @@ async function fetchAndRenderTimeslots() {
         console.error(err);
     }
 }
-async function getAvailableTimeslots(){
+export async function getAvailableTimeslots(){
     localStorage.setItem("treatments", JSON.stringify([1]));//for testing
     localStorage.setItem("date", "2025-05-20");
 

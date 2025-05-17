@@ -40,6 +40,8 @@ export function setupLoginFormEvents() {
                     const data = await response.json();
                     sessionStorage.setItem('token', data.token); //Her gemmes token og rolle i session storage
                     localStorage.setItem('token', data.token);
+                    sessionStorage.setItem('userID', data.userID)
+                    console.log(data.id)
                     //sessionStorage.setItem("role",data.role)
                     alert("Velkommen du er nu logget ind")
                     history.pushState("", "", "/"); // Skift til HOME
