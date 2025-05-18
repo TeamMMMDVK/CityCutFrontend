@@ -23,6 +23,10 @@ async function renderTimeslotSelection() {
     //TODO: Need to add logic if timeslots are unavailable.
     let treatments = JSON.parse(localStorage.getItem("treatments")) //Defined earlier
     //console.log("treatments",treatments)
+    //console.log(timeslotArr)
+    //console.log(timeslotArr.length)
+
+    if (!timeslotArr || timeslotArr.length > 0) {
 
     timeslotArr.forEach(t => {
         let timeslotDiv = document.createElement("div")
@@ -101,6 +105,10 @@ async function renderTimeslotSelection() {
             alert(error.message)
         }
     })
+    } else {
+        console.log("No timeslots in else block")
+        bookingContainer.innerHTML = "No timeslots available."
+    }
 
 
 
