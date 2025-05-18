@@ -7,12 +7,12 @@ import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.j
 import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
 import renderTimeslots from "./booking/timeslots.js";
-import renderTreatmentSelectionView from "./booking/selectTreatments.js";
+import { renderTreatmentSelectionView } from "./booking/selectTreatments.js";
 
 const routes = {
     "/": { title: "Home", render: home },
     "/timeslots": { title: "Book timeslot", render: renderTimeslots },
-    "/book": { title: "Book", render: book },
+    "/book": { title: "Book", render: renderTreatmentSelectionView },
     "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView },
     "/login": {
         title: "Login",
