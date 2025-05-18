@@ -8,6 +8,14 @@ export default () => {
 `};
 const stylistIDHC = 1; //Refactor this when scaling up for more stylists
 
+function bookingSuccesful(timeslots) {
+    const bookingContainer = document.getElementById("bookingContainer")
+    bookingContainer.innerHTML = " ";
+
+    //bookingContainer.innerHTML = `Booking succesful for ${timeslots.get[0].date}`
+    bookingContainer.innerHTML = "Booking succesful"
+}
+
 async function renderTimeslotSelection() {
     const timeslotArr = await getAvailableTimeslots()
     const bookingContainer = document.getElementById("bookingContainer")
@@ -87,6 +95,7 @@ async function renderTimeslotSelection() {
             })
             if (!response.ok) throw new Error('Fejl ved oprettelse af booking')
             alert('Booking oprettet')
+            bookingSuccesful(timeslotArr)
 
         }catch(error) {
             alert(error.message)
