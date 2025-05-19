@@ -12,7 +12,7 @@ import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
 const routes = {
     "/": { title: "Home", render: home },
     "/timeslots": { title: "Book timeslot", render: renderTimeslots },
-    "/book": { title: "Book", render: renderTreatmentSelectionView },
+    "/book": { title: "Book", render: book },
     "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView },
     "/login": {
         title: "Login",
@@ -28,7 +28,7 @@ const routes = {
     "/opret": {
         title: "Opret bruger",
         render: () => {
-            const role = sessionStorage.getItem("role");
+            const role = getRoleFromToken();
             const currentUserRole = role ? role : "ROLE_CUSTOMER";
             console.log("currentUser: ", currentUserRole);
             const html = renderRegisterForm(currentUserRole);

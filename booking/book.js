@@ -15,8 +15,7 @@ function bookingSuccesful(timeslots) {
     //bookingContainer.innerHTML = `Booking succesful for ${timeslots.get[0].date}`
     bookingContainer.innerHTML = "Booking succesful"
 }
-
-async function renderTimeslotSelection() {
+ async function renderTimeslotSelection() {
     const timeslotArr = await getAvailableTimeslots()
     const bookingContainer = document.getElementById("bookingContainer")
     let selectedTimeslots = JSON.parse(localStorage.getItem("selectedTimeSlots")) || []
@@ -84,7 +83,7 @@ async function renderTimeslotSelection() {
         let uID = sessionStorage.getItem("userID")
         let bookingObject = {
             stylistID : stylistIDHC,
-            userID : uID,
+            userID : parseInt(uID),
             comment : "",
             treatmentIds : treatments,
             timeslotIds : timeslotIds
@@ -94,7 +93,7 @@ async function renderTimeslotSelection() {
         try {
             const response = await fetch("http://localhost:8081/api/v1/booking/", {
                 method: 'POST',
-                headers : { 'Content-Type' : 'application/json'},
+                headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${localStorage.getItem("token")}`},
                 body : JSON.stringify(bookingObject)
             })
             if (!response.ok) throw new Error('Fejl ved oprettelse af booking')
@@ -109,8 +108,6 @@ async function renderTimeslotSelection() {
         console.log("No timeslots in else block")
         bookingContainer.innerHTML = "No timeslots available."
     }
-
-
 
 
 
