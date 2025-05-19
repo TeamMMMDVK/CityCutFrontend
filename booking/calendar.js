@@ -21,7 +21,7 @@ export default function calendar() {
 
 async function fetchAvailability(dates) {
     const stylistId = localStorage.getItem('stylistId') || 1;
-    const treatmentIds = JSON.parse(localStorage.getItem('treatmentIds') || '[1,2]');
+    const treatmentIds = JSON.parse(localStorage.getItem('treatments') || '[1,2]');
 
     try {
         const res = await fetch(`http://localhost:8081/v1/calendar/availability?stylist=${stylistId}`, {
