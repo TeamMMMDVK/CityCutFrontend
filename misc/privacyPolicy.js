@@ -1,6 +1,7 @@
 console.log("Her er vi i privacyPolicy")
 
 export default () => `
+<div id="policy">
     <h1>Persondatapolitik</h1>
     <p>Denne persondatapolitik er gældende for de oplysninger, som du giver til os i forbindelse med booking af behandling.</p>
     <p>I politikken kan du læse mere om, hvilke oplysninger vi indsamler, hvordan vi håndterer dine oplysninger, og hvor længe vi opbevarer oplysninger om dig m.m. Du bør læse denne politik og henvende dig til os, såfremt der er oplysninger i politikken, som du ikke kan acceptere.</p>
@@ -53,5 +54,5 @@ export default () => `
 
     <h3>Tilbagekaldelse af samtykke</h3>
     <p>Hvis behandlingen af dine personoplysninger er baseret på dit samtykke, har du til enhver tid ret til at trække dit samtykke tilbage. Din tilbagetrækning påvirker ikke lovligheden af den behandling, der blev gennemført, før du trak dit samtykke tilbage.</p>
-
+</div>
 `;
