@@ -1,3 +1,4 @@
+
 export default function calendar() {
     const html = `<div id="calendar"></div>`;
 
@@ -46,7 +47,8 @@ function getDateRange(start, end) {
 
 function onDateSelected(info) {
     localStorage.setItem('date', info.dateStr);
-    window.location = "/timeslots";
+    history.pushState(null, null, "/book");
+    window.spaRouter()
 }
 
 function renderCalendar(calendarEl) {
