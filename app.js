@@ -7,37 +7,43 @@ import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.j
 import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
 import renderTimeslots from "./booking/timeslots.js";
+import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
 
 const routes = {
-    "/": {title: "Home", render: home},
-    "/timeslots": {title: "Book timeslot", render: renderTimeslots},
-    "/book": {title: "Book", render: book},
+    "/": { title: "Home", render: home },
+    "/timeslots": { title: "Book timeslot", render: renderTimeslots },
+    "/book": { title: "Book", render: renderTreatmentSelectionView },
+    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView },
     "/login": {
-        title: "Login", render: () => {
-            const html = renderLoginForm()
-            setTimeout(() => setupLoginFormEvents(), 0) //sikrer at DOM'en er klar
-            return html
+        title: "Login",
+        render: () => {
+            const html = renderLoginForm();
+            setTimeout(() => setupLoginFormEvents(), 0);
+            return html;
         }
     },
-    "/behandlinger": {title: "behandlinger", render: treatments},
-    "/calendar": {title: "calendar", render: calendar},
-    "/kontakt": {title: "Kontakt", render: contact},
+    "/behandlinger": { title: "behandlinger", render: treatments },
+    "/calendar": { title: "calendar", render: calendar },
+    "/kontakt": { title: "Kontakt", render: contact },
     "/opret": {
-        title: "Opret bruger", render: () => {
-            const role = sessionStorage.getItem("role") //rolle tages fra session storage
-            const currentUserRole = role ? role : "ROLE_CUSTOMER" //hvis bruger endnu ikke er logget ind, dvs. ingen rolle er gemt, så er default rolle "customer"
-            console.log("currentUser: ", currentUserRole)
+        title: "Opret bruger",
+        render: () => {
+            const role = sessionStorage.getItem("role");
+            const currentUserRole = role ? role : "ROLE_CUSTOMER";
+            console.log("currentUser: ", currentUserRole);
             const html = renderRegisterForm(currentUserRole);
-            setTimeout(() => setupRegisterFormEvents(currentUserRole), 0);//sikrer at DOM'en er klar
+            setTimeout(() => setupRegisterFormEvents(currentUserRole), 0);
             return html;
         }
     },
     "/admin": {
-        title: "Admin", render: () => {
-            return admin()
+        title: "Admin",
+        render: () => {
+            return admin();
         }
     }
 };
+
 
 const app = document.getElementById("app")
 
