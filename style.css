@@ -133,6 +133,25 @@ TREATMENT CONTAINER CSS
     font-weight: bold;
 }
 
+.fc-event-background {
+    opacity: 0.4 !important;
+    border: none !important;
+}
+
+.fc-event-background[style*="background-color: red"] {
+    background-color: rgba(255, 0, 0, 0.4) !important;
+    pointer-events: none;
+    cursor: default;
+}
+
+.fc-event-background[style*="background-color: green"] {
+    background-color: rgba(0, 128, 0, 0.4) !important;
+}
+
+.fc-event-background[style*="background-color: orange"] {
+    background-color: rgba(255, 138, 0, 0.75) !important;
+}
+
 #treatment-selection-view {
     max-width: 600px;
     margin: 2rem auto;
