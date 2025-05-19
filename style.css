@@ -14,11 +14,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Tillader elementer at gå på ny linje */
 }
 
 header h1 {
     margin: 0;
-    font-size: 5rem;
+    font-size: 3rem;
+    flex: 1 100%; /* Gør h1 fuld bredde på mindre skærme */
+    text-align: center;
 }
 
 nav ul {
@@ -26,10 +29,12 @@ nav ul {
     display: flex;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap; /* Tillader navigationselementer at gå på ny linje */
+    justify-content: center;
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin: 5px 10px;
 }
 
 nav ul li a {
@@ -46,8 +51,12 @@ main {
     background-color: #f4f4f4;
 }
 
-.content-section {
-    text-align: center;
+#app {
+    width: 100%;
+    height: 100%; /* Sikrer at #app fylder hele main */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
@@ -56,10 +65,13 @@ footer {
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; /* Tillader tekst at gå på ny linje på mindre skærme */
 }
 
 .footer-info, .footer-links, .opening-hours {
     margin: 0 10px;
+    flex: 1; /* Gør hver sektion lige bred */
+    min-width: 200px; /* Minimum bredde for hver sektion */
 }
 
 .footer-links a {
@@ -67,6 +79,25 @@ footer {
     text-decoration: none;
     display: block;
     margin-bottom: 5px;
+}
+
+/* Medieforespørgsler for mindre skærme */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav ul li {
+        margin: 5px;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+
+    .footer-info, .footer-links, .opening-hours {
+        margin: 10px 0;
+    }
 }
 
 #calendar {
@@ -91,6 +122,28 @@ footer {
 
     font-size: 14px;
     cursor: pointer;
+}
+
+/*
+HOME STYLING
+ */
+.home-content {
+    background-image: url('images/imageHome.jpg');
+    background-size: cover; /* Sikrer at billedet dækker hele området */
+    background-position: center; /* Centrerer billedet */
+    background-repeat: no-repeat; /* Forhindrer gentagelse af billedet */
+    width: 100%;
+    height: 100vh; /* Sætter højden til hele viewport højden */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Tekstfarve, så den er synlig mod baggrunden */
+    text-align: center;
+}
+
+.home-content h1, .home-content p {
+    margin: 20px;
 }
 /*
 TREATMENT CONTAINER CSS

@@ -1,11 +1,13 @@
 import book from "./booking/book.js";
 import {renderLoginForm, setupLoginFormEvents} from "./auth/login.js";
-import home from "./home.js"
+import home from "./misc/home.js"
 import treatments from "./booking/treatments.js"
-import contact from "./contact.js"
+import contact from "./misc/contact.js"
 import {renderRegisterForm, setupRegisterFormEvents} from "./auth/registration.js"
 import admin from "./admin/admin.js";
 import calendar from "./booking/calendar.js";
+import privacyPolicy from "./misc/privacyPolicy.js";
+import cookiePolicy from "./misc/cookiePolicy.js";
 import renderTimeslots from "./booking/timeslots.js";
 import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
 
@@ -41,7 +43,10 @@ const routes = {
         render: () => {
             return admin();
         }
-    }
+    },
+    "/privatlivspolitik": {title: "privatlivspolitik", render: privacyPolicy},
+    "/cookie-politik": {title: "cookie-politik", render: cookiePolicy}
+
 };
 
 
@@ -102,7 +107,6 @@ window.addEventListener("click", e => {
 // LogOut
 function logout() {
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("role");
 
     alert("Du er nu logget ud.");
     history.pushState("", "", "/");
