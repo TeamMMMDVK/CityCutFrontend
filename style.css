@@ -185,3 +185,126 @@ TREATMENT CONTAINER CSS
     text-align: right;
     font-weight: bold;
 }
+
+/*
+TIMESLOT SELECTION
+ */
+#bookingContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Reduced gap between cards */
+    align-items: center; /* Keep cards centered horizontally */
+}
+
+.timeslot {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 12px; /* Reduced padding */
+    width: 280px; /* Adjust width if you want tighter fit */
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.timeslot:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.timeslot h3 {
+    margin: 0 0 6px; /* Reduced margin */
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.timeslot p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+.timeslot.selected {
+    background-color: #cce5ff;
+    border: 2px solid #3399ff;
+}
+
+
+.fc-event-background {
+    opacity: 0.4 !important;
+    border: none !important;
+}
+
+.fc-event-background[style*="background-color: red"] {
+    background-color: rgba(255, 0, 0, 0.4) !important;
+    pointer-events: none;
+    cursor: default;
+}
+
+.fc-event-background[style*="background-color: green"] {
+    background-color: rgba(0, 128, 0, 0.4) !important;
+}
+
+.fc-event-background[style*="background-color: orange"] {
+    background-color: rgba(255, 138, 0, 0.75) !important;
+}
+
+#treatment-selection-view {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fdfdfd;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#treatment-selection-view h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+#treatment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+#treatment-list label {
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#treatment-list label:hover {
+    background-color: #f0f0f0;
+}
+
+#treatment-list input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
+}
+
+#continue-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#continue-btn:hover {
+    background-color: #444;
+}
+

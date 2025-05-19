@@ -1,0 +1,53 @@
+#timeslot-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#timeslot-container p {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* TIMESLOT BUTTONS */
+.timeslot-button {
+    display: inline-block;
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+.timeslot-button:hover {
+    background-color: #333;
+}
+
+.timeslot-button:focus {
+    outline: 2px solid #333;
+    outline-offset: 2px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+    #timeslot-container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .timeslot-button {
+        font-size: 0.95rem;
+        padding: 0.65rem 1rem;
+    }
+}
