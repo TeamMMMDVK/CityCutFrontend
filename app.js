@@ -10,12 +10,13 @@ import privacyPolicy from "./misc/privacyPolicy.js";
 import cookiePolicy from "./misc/cookiePolicy.js";
 import renderTimeslots from "./booking/timeslots.js";
 import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
+import {populateNavBar} from "./misc/linkbarRendering.js";
 
 const routes = {
     "/": { title: "Home", render: home },
     "/timeslots": { title: "Book timeslot", render: renderTimeslots },
-    "/book": { title: "Book", render: book },
-    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView },
+    "/book": { title: "Book", render: book }, //3
+    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView }, //1
     "/login": {
         title: "Login",
         render: () => {
@@ -24,8 +25,8 @@ const routes = {
             return html;
         }
     },
-    "/behandlinger": { title: "behandlinger", render: treatments },
-    "/calendar": { title: "calendar", render: calendar },
+    "/behandlinger": { title: "behandlinger", render: treatments }, //Bare info panel
+    "/calendar": { title: "calendar", render: calendar }, //2
     "/kontakt": { title: "Kontakt", render: contact },
     "/opret": {
         title: "Opret bruger",
@@ -38,7 +39,7 @@ const routes = {
             return html;
         }
     },
-    "/admin": {
+    "/admin": { //needs to be hidden
         title: "Admin",
         render: () => {
             return admin();
@@ -107,6 +108,7 @@ window.addEventListener("click", e => {
 // LogOut
 function logout() {
     sessionStorage.removeItem("token");
+    localStorage.removeItem("loggedInBool")
 
     alert("Du er nu logget ud.");
     history.pushState("", "", "/");
@@ -141,5 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => { //Set boolean flag to false on DOMContentLoaded
+    let loggedInBool = false;
+    localStorage.setItem("loggedInBool", loggedInBool)
+    populateNavBar()
+
+})
 
 

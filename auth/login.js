@@ -43,6 +43,10 @@ export function setupLoginFormEvents() {
                     sessionStorage.setItem('userID', data.userID)
                     console.log(data.id)
                     //sessionStorage.setItem("role",data.role)
+
+                    let loggedInBool = true; //Upon succesful login set boolean flag to true for rendering navbar.
+                    localStorage.setItem("loggedInBool", loggedInBool)
+
                     alert("Velkommen du er nu logget ind")
                     history.pushState("", "", "/"); // Skift til HOME
                     window.spaRouter(); // Kalder routeren i app.js, som opdaterer visningen
