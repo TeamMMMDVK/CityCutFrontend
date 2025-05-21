@@ -47,7 +47,6 @@ const routes = {
     },
     "/privatlivspolitik": {title: "privatlivspolitik", render: privacyPolicy},
     "/cookie-politik": {title: "cookie-politik", render: cookiePolicy}
-
 };
 
 
@@ -71,13 +70,17 @@ function router() {
     if (protectedRoutes[path]) {
         if (!token) {
             history.replaceState("", "", "/login");
+            populateNavBar()
             router(); // Kald router igen for at vise login-siden
+
             return;
         }
         if (!protectedRoutes[path].includes(role)) {
             alert("Du har ikke adgang til denne side.");
             history.replaceState("", "", "/");
+            populateNavBar()
             router();
+
             return;
         }
     }
@@ -85,12 +88,15 @@ function router() {
     if (view) {
         document.title = view.title;
         const result = view.render();
+        populateNavBar()
         if (typeof result === "string" && result.trim()) {
             app.innerHTML = result;
         }
     } else {
         history.replaceState("", "", "/");
+        populateNavBar()
         router();
+
     }
 }
 
@@ -135,6 +141,10 @@ window.addEventListener("popstate", router);
 window.addEventListener("DOMContentLoaded", router);
 
 document.addEventListener("DOMContentLoaded", () => {
+    let loggedInBool = false;
+    localStorage.setItem("loggedInBool", loggedInBool)
+    populateNavBar() //TODO: insert role argument
+/*
     const logoutLink = document.getElementById("logout-link");
     if (logoutLink) {
         logoutLink.addEventListener("click", (e) => {
@@ -142,12 +152,23 @@ document.addEventListener("DOMContentLoaded", () => {
             logout();
         });
     }
+
+ */
 });
+document.getElementById("linkbar").addEventListener('click', (e) => {
+    if (e.target && e.target.id ==="logout-link") {
+        e.preventDefault()
+        logout()
+    }
+})
 
 document.addEventListener('DOMContentLoaded', () => { //Set boolean flag to false on DOMContentLoaded
+    /*
     let loggedInBool = false;
     localStorage.setItem("loggedInBool", loggedInBool)
     populateNavBar() //TODO: insert role argument
+
+     */
 
 })
 
