@@ -15,10 +15,10 @@ import {populateNavBar} from "./misc/linkbarRendering.js";
 
 
 const routes = {
-    "/": { title: "Home", render: home },
-    "/timeslots": { title: "Book timeslot", render: renderTimeslots },
-    "/book": { title: "Book", render: book }, //3
-    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView }, //1
+    "/": {title: "Home", render: home},
+    "/timeslots": {title: "Book timeslot", render: renderTimeslots},
+    "/book": {title: "Book", render: book}, //3
+    "/select-treatments": {title: "Vælg behandlinger", render: renderTreatmentSelectionView}, //1
     "/login": {
         title: "Login",
         render: () => {
@@ -27,10 +27,10 @@ const routes = {
             return html;
         }
     },
-    "/auth-choice": { title: "Login eller opret bruger", render: renderAuthChoice },
-    "/behandlinger": { title: "behandlinger", render: treatments }, //Bare info panel
-    "/calendar": { title: "calendar", render: calendar }, //2
-    "/kontakt": { title: "Kontakt", render: contact },
+    "/auth-choice": {title: "Login eller opret bruger", render: renderAuthChoice},
+    "/behandlinger": {title: "behandlinger", render: treatments}, //Bare info panel
+    "/calendar": {title: "calendar", render: calendar}, //2
+    "/kontakt": {title: "Kontakt", render: contact},
     "/opret": {
         title: "Opret bruger",
         render: () => {
@@ -116,8 +116,8 @@ window.addEventListener("click", e => {
 
 // LogOut
 function logout() {
-    sessionStorage.removeItem("token");
-    localStorage.removeItem("loggedInBool")
+    sessionStorage.clear()
+    localStorage.clear()
 
     alert("Du er nu logget ud.");
     history.pushState("", "", "/");
@@ -147,19 +147,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let loggedInBool = false;
     localStorage.setItem("loggedInBool", loggedInBool)
     populateNavBar(getRoleFromToken())
-/*
-    const logoutLink = document.getElementById("logout-link");
-    if (logoutLink) {
-        logoutLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            logout();
-        });
-    }
+    /*
+        const logoutLink = document.getElementById("logout-link");
+        if (logoutLink) {
+            logoutLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                logout();
+            });
+        }
 
- */
+     */
 });
 document.getElementById("linkbar").addEventListener('click', (e) => {
-    if (e.target && e.target.id ==="logout-link") {
+    if (e.target && e.target.id === "logout-link") {
         e.preventDefault()
         logout()
     }

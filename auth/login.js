@@ -48,15 +48,39 @@ export function setupLoginFormEvents() {
                     localStorage.setItem("loggedInBool", loggedInBool)
 
                     // Efter login - tjek om der er en pending booking
-                    if (localStorage.getItem("pendingBooking")) {
-                        history.pushState("", "", "/book");
-                        window.spaRouter(); // Når book.js loader, skal den tjekke og automatisk sende
+                    const pendingBooking = JSON.parse(localStorage.getItem("pendingBooking"));
+                    const userID = sessionStorage.getItem("userID");
+
+                    if (pendingBooking && userID) {
+                        pendingBooking.userID = parseInt(userID);
+
+                        try {
+                            const response = await fetch("http://localhost:8081/api/v1/booking/", {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                                },
+                                body: JSON.stringify(pendingBooking)
+                            });
+
+                            if (!response.ok) throw new Error("Fejl ved oprettelse af booking");
+                            alert("Booking gennemført");
+                            localStorage.removeItem("pendingBooking");
+                            history.pushState("", "", "/book");
+                            window.spaRouter();
+
+                        } catch (error) {
+                            alert(error.message);
+                        }
+
                     } else {
+                        // Hvis ikke der er gemt en igangværende booking, så redirectes til forsiden
                         alert("Velkommen du er nu logget ind")
-                        history.pushState("", "", "/"); // Skift til HOME
-                        window.spaRouter(); // Kalder routeren i app.js, som opdaterer visningen
-                        console.log("Login lykkedes. Token er gemt")
+                        history.pushState("", "", "/");
+                        window.spaRouter();
                     }
+
                 } else {
                     output.textContent = "Login fejlede.";
                 }
