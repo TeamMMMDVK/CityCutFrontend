@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => { //Set boolean flag to false on DOMContentLoaded
     let loggedInBool = false;
     localStorage.setItem("loggedInBool", loggedInBool)
-    populateNavBar()
+    populateNavBar() //TODO: insert role argument
 
 })
 
