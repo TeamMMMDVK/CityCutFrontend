@@ -65,8 +65,7 @@ function router() {
 
     // Beskyttede ruter med rollekrav
     const protectedRoutes = {
-        "/admin": ["ROLE_ADMIN"],
-        "/book": ["ROLE_ADMIN", "ROLE_CUSTOMER"]
+        "/admin": ["ROLE_ADMIN"]
         // Tilføj evt. flere beskyttede ruter her
     };
 
