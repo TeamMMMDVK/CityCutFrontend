@@ -70,7 +70,7 @@ function router() {
     if (protectedRoutes[path]) {
         if (!token) {
             history.replaceState("", "", "/login");
-            populateNavBar()
+            populateNavBar(role)
             router(); // Kald router igen for at vise login-siden
 
             return;
@@ -78,7 +78,7 @@ function router() {
         if (!protectedRoutes[path].includes(role)) {
             alert("Du har ikke adgang til denne side.");
             history.replaceState("", "", "/");
-            populateNavBar()
+            populateNavBar(role)
             router();
 
             return;
@@ -88,13 +88,13 @@ function router() {
     if (view) {
         document.title = view.title;
         const result = view.render();
-        populateNavBar()
+        populateNavBar(role)
         if (typeof result === "string" && result.trim()) {
             app.innerHTML = result;
         }
     } else {
         history.replaceState("", "", "/");
-        populateNavBar()
+        populateNavBar(role)
         router();
 
     }
@@ -143,7 +143,7 @@ window.addEventListener("DOMContentLoaded", router);
 document.addEventListener("DOMContentLoaded", () => {
     let loggedInBool = false;
     localStorage.setItem("loggedInBool", loggedInBool)
-    populateNavBar() //TODO: insert role argument
+    populateNavBar(getRoleFromToken())
 /*
     const logoutLink = document.getElementById("logout-link");
     if (logoutLink) {
@@ -160,16 +160,6 @@ document.getElementById("linkbar").addEventListener('click', (e) => {
         e.preventDefault()
         logout()
     }
-})
-
-document.addEventListener('DOMContentLoaded', () => { //Set boolean flag to false on DOMContentLoaded
-    /*
-    let loggedInBool = false;
-    localStorage.setItem("loggedInBool", loggedInBool)
-    populateNavBar() //TODO: insert role argument
-
-     */
-
 })
 
 
