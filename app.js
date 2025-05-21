@@ -1,5 +1,6 @@
 import book from "./booking/book.js";
 import {renderLoginForm, setupLoginFormEvents} from "./auth/login.js";
+import renderAuthChoice from "./auth/authChoice.js";
 import home from "./misc/home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./misc/contact.js"
@@ -11,6 +12,7 @@ import cookiePolicy from "./misc/cookiePolicy.js";
 import renderTimeslots from "./booking/timeslots.js";
 import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
 import {populateNavBar} from "./misc/linkbarRendering.js";
+
 
 const routes = {
     "/": { title: "Home", render: home },
@@ -25,6 +27,7 @@ const routes = {
             return html;
         }
     },
+    "/auth-choice": { title: "Login eller opret bruger", render: renderAuthChoice },
     "/behandlinger": { title: "behandlinger", render: treatments }, //Bare info panel
     "/calendar": { title: "calendar", render: calendar }, //2
     "/kontakt": { title: "Kontakt", render: contact },

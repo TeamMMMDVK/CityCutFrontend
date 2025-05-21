@@ -114,10 +114,7 @@ async function renderTimeslotSelection() {
             await submitBooking(bookingObject);
         });
 
-
-            console.log(bookingObject)
-
-        async function submitBooking(bookingObjekt)
+        async function submitBooking(bookingObject) {
             try {
                 const response = await fetch("http://localhost:8081/api/v1/booking/", {
                     method: 'POST',
@@ -129,17 +126,15 @@ async function renderTimeslotSelection() {
                 })
                 if (!response.ok) throw new Error('Fejl ved oprettelse af booking')
                 alert('Booking oprettet')
-                ocalStorage.removeItem("pendingBooking");
+                localStorage.removeItem("pendingBooking");
                 bookingSuccesful(timeslotArr)
 
             } catch (error) {
                 alert(error.message)
             }
-        })
+        }
     } else {
         console.log("No timeslots in else block")
         bookingContainer.innerHTML = "No timeslots available."
     }
-
-
 }
