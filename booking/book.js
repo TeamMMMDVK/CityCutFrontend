@@ -93,7 +93,8 @@ function bookingSuccesful(timeslots) {
         try {
             const response = await fetch("http://localhost:8081/api/v1/booking/", {
                 method: 'POST',
-                headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${localStorage.getItem("token")}`},
+                headers : { 'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem("token")}`},
                 body : JSON.stringify(bookingObject)
             })
             if (!response.ok) throw new Error('Fejl ved oprettelse af booking')

@@ -1,4 +1,3 @@
-
 export default function calendar() {
     const html = `<div id="calendar"></div>`;
 
@@ -22,13 +21,16 @@ export default function calendar() {
 
 async function fetchAvailability(dates) {
     const stylistId = localStorage.getItem('stylistId') || 1;
+    console.log("stylistId", stylistId)
     const treatmentIds = JSON.parse(localStorage.getItem('treatments') || '[1,2]');
 
     try {
         const res = await fetch(`http://localhost:8081/v1/calendar/availability?stylist=${stylistId}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ dates, treatmentIds }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({dates, treatmentIds}),
         });
         const data = await res.json();
         return Array.isArray(data) ? data : data.data || [];
@@ -55,7 +57,7 @@ function renderCalendar(calendarEl) {
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         height: 'auto',
-        headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
+        headerToolbar: {left: 'prev,next today', center: 'title', right: ''},
         dateClick: onDateSelected,
         datesSet: async (info) => {
             const dates = getDateRange(info.start, info.end);
@@ -64,7 +66,7 @@ function renderCalendar(calendarEl) {
             calendar.removeAllEvents();
             availability.forEach(date => {
                 const color = date.status === 'FULL' ? 'red' : date.status === 'PARTIAL' ? 'orange' : date.status === 'AVAILABLE' ? 'green' : 'gray';
-                calendar.addEvent({ start: date.date, display: 'background', color, allDay: true });
+                calendar.addEvent({start: date.date, display: 'background', color, allDay: true});
             });
         }
     });
