@@ -3,11 +3,13 @@ import {getAvailableTimeslots} from "./timeslots.js";
 export default () => {
     setTimeout(renderTimeslotSelection, 0)
     return `
+<section id="treatment-selection-view">
 <div id="bookingRubrik">
     <h1>Book en tid</h1>
-    <p>Consectetur in vitae totam nulla reprehenderit est earum debitis quam laboriosam.</p>
+    <p>Hvilket tidspunkt passer dig bedst?</p>
     </div>
     <div id="bookingContainer"></div>
+    </section>
 `
 };
 const stylistIDHC = 1; //Refactor this when scaling up for more stylists
@@ -79,11 +81,13 @@ async function renderTimeslotSelection() {
         let checkboxLabelInp = document.createElement("label")
 
         checkboxLabelInp.htmlFor = "consentCheckbox"
-        checkboxLabelInp.textContent = "Confirm your booking selection. You also consent to our privacy and cookie policies."
+        checkboxLabelInp.textContent = "Venligst bekræft, at du med denne reservation accepterer" +
+            " vores privatlivspolitik og cookie-politik"
         bookingContainer.appendChild(checkboxLabelInp)
 
         let button = document.createElement("button")
-        button.innerHTML = "Submit booking"
+        button.id = "continue-btn"
+        button.innerHTML = "Bekræft booking"
         button.type = "submit"
         button.disabled = true;
         button.style.opacity = 0.5;
