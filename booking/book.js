@@ -3,19 +3,33 @@ import {getAvailableTimeslots} from "./timeslots.js";
 export default () => {
     setTimeout(renderTimeslotSelection, 0)
     return `
+<div id="bookingRubrik">
     <h1>Book en tid</h1>
     <p>Consectetur in vitae totam nulla reprehenderit est earum debitis quam laboriosam.</p>
+    </div>
     <div id="bookingContainer"></div>
 `
 };
 const stylistIDHC = 1; //Refactor this when scaling up for more stylists
 
 function bookingSuccesful(timeslots) {
+    console.log("Her er jeg i metoden bookingSuccesful")
     const bookingContainer = document.getElementById("bookingContainer")
+    const bookingRubrik = document.getElementById("bookingRubrik")
+    bookingRubrik.innerHTML = " "
     bookingContainer.innerHTML = " ";
 
-    //bookingContainer.innerHTML = `Booking succesful for ${timeslots.get[0].date}`
-    bookingContainer.innerHTML = "Booking succesful"
+    bookingContainer.innerHTML = `
+        <div class="success-message">
+            <h2>Booking gennemført!</h2>
+            <p>Tak for din booking. Du vil modtage en bekræftelse snarest.</p>
+            <button id="backHome">Til forsiden</button>
+        </div>
+    `;
+    document.getElementById("backHome").addEventListener("click", () => {
+        history.pushState("", "", "/");
+        window.spaRouter();
+    });
 }
 
 async function renderTimeslotSelection() {

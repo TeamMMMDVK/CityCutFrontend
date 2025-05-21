@@ -65,9 +65,11 @@ export function setupLoginFormEvents() {
                             });
 
                             if (!response.ok) throw new Error("Fejl ved oprettelse af booking");
-                            alert("Booking gennemført");
+
+                            alert("Booking gennemført "+ localStorage.getItem("pendingBooking"));
+
                             localStorage.removeItem("pendingBooking");
-                            history.pushState("", "", "/book");
+                            history.pushState("", "", "/");
                             window.spaRouter();
 
                         } catch (error) {
