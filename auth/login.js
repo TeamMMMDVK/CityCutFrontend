@@ -23,11 +23,11 @@ export function setupLoginFormEvents() {
     form.addEventListener("submit", async function (event) {
             event.preventDefault()
 
-        const email = document.getElementById("email").value
-        const password = document.getElementById("password").value
-        const output = document.getElementById("output")
+            const email = document.getElementById("email").value
+            const password = document.getElementById("password").value
+            const output = document.getElementById("output")
 
-            const loginRequest = { email , password }
+            const loginRequest = {email, password}
 
             try {
                 const response = await fetch('http://localhost:8081/api/v1/user/login', {
@@ -47,10 +47,16 @@ export function setupLoginFormEvents() {
                     let loggedInBool = true; //Upon succesful login set boolean flag to true for rendering navbar.
                     localStorage.setItem("loggedInBool", loggedInBool)
 
-                    alert("Velkommen du er nu logget ind")
-                    history.pushState("", "", "/"); // Skift til HOME
-                    window.spaRouter(); // Kalder routeren i app.js, som opdaterer visningen
-                    console.log("Login lykkedes. Token er gemt")
+                    // Efter login - tjek om der er en pending booking
+                    if (localStorage.getItem("pendingBooking")) {
+                        history.pushState("", "", "/book");
+                        window.spaRouter(); // Når book.js loader, skal den tjekke og automatisk sende
+                    } else {
+                        alert("Velkommen du er nu logget ind")
+                        history.pushState("", "", "/"); // Skift til HOME
+                        window.spaRouter(); // Kalder routeren i app.js, som opdaterer visningen
+                        console.log("Login lykkedes. Token er gemt")
+                    }
                 } else {
                     output.textContent = "Login fejlede.";
                 }

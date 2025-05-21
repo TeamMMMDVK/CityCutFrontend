@@ -19,6 +19,16 @@ function bookingSuccesful(timeslots) {
 }
 
 async function renderTimeslotSelection() {
+
+    // Hvis der er en pending booking og bruger nu er logget ind, prøv at sende den
+    const pendingBooking = JSON.parse(localStorage.getItem("pendingBooking"));
+    const userID = sessionStorage.getItem("userID");
+    if (pendingBooking && userID) {
+        pendingBooking.userID = parseInt(userID);
+        await submitBooking(pendingBooking);
+        return;
+    }
+
     const timeslotArr = await getAvailableTimeslots()
     const bookingContainer = document.getElementById("bookingContainer")
     let selectedTimeslots = JSON.parse(localStorage.getItem("selectedTimeSlots")) || []
