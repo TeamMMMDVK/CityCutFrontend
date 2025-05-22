@@ -10,12 +10,13 @@ import privacyPolicy from "./misc/privacyPolicy.js";
 import cookiePolicy from "./misc/cookiePolicy.js";
 import renderTimeslots from "./booking/timeslots.js";
 import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
+import {populateNavBar} from "./misc/linkbarRendering.js";
 
 const routes = {
     "/": { title: "Home", render: home },
     "/timeslots": { title: "Book timeslot", render: renderTimeslots },
-    "/book": { title: "Book", render: book },
-    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView },
+    "/book": { title: "Book", render: book }, //3
+    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView }, //1
     "/login": {
         title: "Login",
         render: () => {
@@ -24,8 +25,8 @@ const routes = {
             return html;
         }
     },
-    "/behandlinger": { title: "behandlinger", render: treatments },
-    "/calendar": { title: "calendar", render: calendar },
+    "/behandlinger": { title: "behandlinger", render: treatments }, //Bare info panel
+    "/calendar": { title: "calendar", render: calendar }, //2
     "/kontakt": { title: "Kontakt", render: contact },
     "/opret": {
         title: "Opret bruger",
@@ -38,7 +39,7 @@ const routes = {
             return html;
         }
     },
-    "/admin": {
+    "/admin": { //needs to be hidden
         title: "Admin",
         render: () => {
             return admin();
@@ -46,7 +47,6 @@ const routes = {
     },
     "/privatlivspolitik": {title: "privatlivspolitik", render: privacyPolicy},
     "/cookie-politik": {title: "cookie-politik", render: cookiePolicy}
-
 };
 
 
@@ -70,13 +70,17 @@ function router() {
     if (protectedRoutes[path]) {
         if (!token) {
             history.replaceState("", "", "/login");
+            populateNavBar(role)
             router(); // Kald router igen for at vise login-siden
+
             return;
         }
         if (!protectedRoutes[path].includes(role)) {
             alert("Du har ikke adgang til denne side.");
             history.replaceState("", "", "/");
+            populateNavBar(role)
             router();
+
             return;
         }
     }
@@ -84,12 +88,15 @@ function router() {
     if (view) {
         document.title = view.title;
         const result = view.render();
+        populateNavBar(role)
         if (typeof result === "string" && result.trim()) {
             app.innerHTML = result;
         }
     } else {
         history.replaceState("", "", "/");
+        populateNavBar(role)
         router();
+
     }
 }
 
@@ -107,6 +114,7 @@ window.addEventListener("click", e => {
 // LogOut
 function logout() {
     sessionStorage.removeItem("token");
+    localStorage.removeItem("loggedInBool")
 
     alert("Du er nu logget ud.");
     history.pushState("", "", "/");
@@ -133,6 +141,10 @@ window.addEventListener("popstate", router);
 window.addEventListener("DOMContentLoaded", router);
 
 document.addEventListener("DOMContentLoaded", () => {
+    let loggedInBool = false;
+    localStorage.setItem("loggedInBool", loggedInBool)
+    populateNavBar(getRoleFromToken())
+/*
     const logoutLink = document.getElementById("logout-link");
     if (logoutLink) {
         logoutLink.addEventListener("click", (e) => {
@@ -140,6 +152,14 @@ document.addEventListener("DOMContentLoaded", () => {
             logout();
         });
     }
+
+ */
 });
+document.getElementById("linkbar").addEventListener('click', (e) => {
+    if (e.target && e.target.id ==="logout-link") {
+        e.preventDefault()
+        logout()
+    }
+})
 
 

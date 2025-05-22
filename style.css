@@ -197,15 +197,29 @@ TIMESLOT SELECTION
 }
 
 .timeslot {
-    background-color: #ffffff;
+    display: inline-block;
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+    /*
+    background-color: #fbfbfb;
     border: 1px solid #ddd;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 12px; /* Reduced padding */
-    width: 280px; /* Adjust width if you want tighter fit */
+    padding: 12px; // Reduced padding
+    width: 280px; // Adjust width if you want tighter fit
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+     */
+
 }
 
 .timeslot:hover {
@@ -216,17 +230,20 @@ TIMESLOT SELECTION
 .timeslot h3 {
     margin: 0 0 6px; /* Reduced margin */
     font-size: 1.2rem;
-    color: #333;
+    color: #090606;
 }
 
 .timeslot p {
     margin: 0;
     font-size: 0.95rem;
-    color: #666;
+    color: #ffffff;
 }
 .timeslot.selected {
+    /*
     background-color: #cce5ff;
-    border: 2px solid #3399ff;
+     */
+    background-color: #3b74b0;
+    border: 2px solid #030304;
 }
 
 
