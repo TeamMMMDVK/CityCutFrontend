@@ -1,5 +1,6 @@
 import book from "./booking/book.js";
 import {renderLoginForm, setupLoginFormEvents} from "./auth/login.js";
+import renderAuthChoice, {setupAuthChoiceEvents} from "./auth/authChoice.js";
 import home from "./misc/home.js"
 import treatments from "./booking/treatments.js"
 import contact from "./misc/contact.js"
@@ -12,11 +13,12 @@ import renderTimeslots from "./booking/timeslots.js";
 import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
 import {populateNavBar} from "./misc/linkbarRendering.js";
 
+
 const routes = {
-    "/": { title: "Home", render: home },
-    "/timeslots": { title: "Book timeslot", render: renderTimeslots },
-    "/book": { title: "Book", render: book }, //3
-    "/select-treatments": { title: "Vælg behandlinger", render: renderTreatmentSelectionView }, //1
+    "/": {title: "Home", render: home},
+    "/timeslots": {title: "Book timeslot", render: renderTimeslots},
+    "/book": {title: "Book", render: book}, //3
+    "/select-treatments": {title: "Vælg behandlinger", render: renderTreatmentSelectionView}, //1
     "/login": {
         title: "Login",
         render: () => {
@@ -25,9 +27,16 @@ const routes = {
             return html;
         }
     },
-    "/behandlinger": { title: "behandlinger", render: treatments }, //Bare info panel
-    "/calendar": { title: "calendar", render: calendar }, //2
-    "/kontakt": { title: "Kontakt", render: contact },
+    "/auth-choice": {
+        title: "Login eller opret bruger", render: () => {
+            const html = renderAuthChoice()
+            setTimeout(() => setupAuthChoiceEvents(), 0);
+            return html;
+        }
+    },
+    "/behandlinger": {title: "behandlinger", render: treatments}, //Bare info panel
+    "/calendar": {title: "calendar", render: calendar}, //2
+    "/kontakt": {title: "Kontakt", render: contact},
     "/opret": {
         title: "Opret bruger",
         render: () => {
@@ -62,8 +71,7 @@ function router() {
 
     // Beskyttede ruter med rollekrav
     const protectedRoutes = {
-        "/admin": ["ROLE_ADMIN"],
-        "/book": ["ROLE_ADMIN", "ROLE_CUSTOMER"]
+        "/admin": ["ROLE_ADMIN"]
         // Tilføj evt. flere beskyttede ruter her
     };
 
@@ -113,8 +121,8 @@ window.addEventListener("click", e => {
 
 // LogOut
 function logout() {
-    sessionStorage.removeItem("token");
-    localStorage.removeItem("loggedInBool")
+    sessionStorage.clear()
+    localStorage.clear()
 
     alert("Du er nu logget ud.");
     history.pushState("", "", "/");
@@ -144,19 +152,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let loggedInBool = false;
     localStorage.setItem("loggedInBool", loggedInBool)
     populateNavBar(getRoleFromToken())
-/*
-    const logoutLink = document.getElementById("logout-link");
-    if (logoutLink) {
-        logoutLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            logout();
-        });
-    }
+    /*
+        const logoutLink = document.getElementById("logout-link");
+        if (logoutLink) {
+            logoutLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                logout();
+            });
+        }
 
- */
+     */
 });
 document.getElementById("linkbar").addEventListener('click', (e) => {
-    if (e.target && e.target.id ==="logout-link") {
+    if (e.target && e.target.id === "logout-link") {
         e.preventDefault()
         logout()
     }

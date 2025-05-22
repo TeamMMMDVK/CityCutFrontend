@@ -1,9 +1,11 @@
 export default () => {
     setTimeout(fetchAndRenderTreatmentsFromDB, 0)
     return `
+<section id="treatment-selection-view">
     <h1>Behandlinger</h1>
-    <p>Vita formosa est, et ad plenissimam meretur fruendum..</p>
-    <div id="treatmentsContainer">Loading treatments...</div>`;
+    <div id="treatmentsContainer">Loading treatments...</div>
+    <button id="continue-btn">Book</button>    
+</section>`;
 };
 const urlGetAllTreatmentsFromDB = "http://localhost:8081/api/v1/treatments"
 
@@ -36,9 +38,13 @@ async function fetchAndRenderTreatmentsFromDB() {
             </table>
         `;
 
-    } catch(err) {
-        container.innerHTML= `<p>Something went wrong fetching the treatments.</p>`
+    } catch (err) {
+        container.innerHTML = `<p>Something went wrong fetching the treatments.</p>`
         console.log(err, "Error")
     }
 
+    document.getElementById("continue-btn").addEventListener("click",() => {
+        history.pushState("", "", "/select-treatments");
+        window.spaRouter();
+    })
 }
