@@ -12,6 +12,7 @@ import cookiePolicy from "./misc/cookiePolicy.js";
 import renderTimeslots from "./booking/timeslots.js";
 import {renderTreatmentSelectionView} from "./booking/selectTreatments.js";
 import {populateNavBar} from "./misc/linkbarRendering.js";
+import {renderTimeSlotManager} from "./admin/manageTimeSlots.js";
 
 
 const routes = {
@@ -54,9 +55,14 @@ const routes = {
             return admin();
         }
     },
+    "/admin/timeslots": {
+        title: "Administrer arbejdstider",
+        render: renderTimeSlotManager
+    },
     "/privatlivspolitik": {title: "privatlivspolitik", render: privacyPolicy},
     "/cookie-politik": {title: "cookie-politik", render: cookiePolicy}
 };
+
 
 
 const app = document.getElementById("app")
