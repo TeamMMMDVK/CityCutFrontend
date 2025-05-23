@@ -27,7 +27,7 @@ export function renderTimeSlotManager() {
     </section>
   `;
 
-    const stylistId = 1; // ✅ Hardcoded stylist ID
+    const stylistId = 1;
 
     document.getElementById("add-slot-btn").addEventListener("click", () => {
         const day = document.getElementById("day-select").value;
@@ -53,7 +53,7 @@ export function renderTimeSlotManager() {
         })
             .then(res => {
                 if (res.ok) {
-                    document.getElementById("slot-result-msg").innerText = "Tidsrum tilføjet ✅";
+                    document.getElementById("slot-result-msg").innerText = "Tidsrum tilføjet.";
                 } else {
                     throw new Error("Fejl ved oprettelse");
                 }
@@ -77,7 +77,7 @@ export function renderTimeSlotManager() {
                 dayOfWeek: day
             })
         })
-            .then(res => res.ok ? "Standardtider tilføjet ✅" : Promise.reject("Fejl"))
+            .then(res => res.ok ? "Standardtider tilføjet." : Promise.reject("Fejl"))
             .then(msg => document.getElementById("slot-result-msg").innerText = msg)
             .catch(() => document.getElementById("slot-result-msg").innerText = "Fejl ved standard-oprettelse.");
     });
