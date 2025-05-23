@@ -68,9 +68,12 @@ export function renderTimeSlotManager() {
 
         fetch("http://localhost:8081/api/v1/timeslots/default", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+            },
             body: JSON.stringify({
-                stylistId,
+                stylistId: 1,
                 dayOfWeek: day
             })
         })

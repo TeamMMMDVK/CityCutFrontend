@@ -42,6 +42,7 @@ export function setupLoginFormEvents() {
                     localStorage.setItem('token', data.token);
                     sessionStorage.setItem('userID', data.userID)
                     console.log(data.id)
+                    console.log("Saved token:", data.token);
                     //sessionStorage.setItem("role",data.role)
 
                     let loggedInBool = true; //Upon succesful login set boolean flag to true for rendering navbar.
