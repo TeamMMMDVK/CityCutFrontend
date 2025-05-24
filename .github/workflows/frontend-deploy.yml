@@ -27,17 +27,7 @@ jobs:
           host: ${{ secrets.HETZNER_HOST }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: |
-            Dockerfile
-            nginx.conf
-            index.html
-            app.js
-            style.css
-            admin/**
-            auth/**
-            booking/**
-            misc/**
-            images/**
+          source: ./*
           target: /root/frontend
           debug: true
 
