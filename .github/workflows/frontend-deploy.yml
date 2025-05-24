@@ -2,7 +2,7 @@ name: Deploy Frontend to Hetzner
 
 on:
   push:
-    branches: [ "Main" ]
+    branches: [ "deploymentHetznerNginx" ]
 
 jobs:
   build-and-deploy:
