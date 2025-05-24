@@ -15,6 +15,12 @@ jobs:
       - name: Debug – vis filstruktur
         run: ls -R
 
+      - name: Bekræft aktuelle sti og filer
+        run: |
+          pwd
+          ls -la
+
+
       - name: Kopier frontend-filer til server
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -33,6 +39,7 @@ jobs:
             misc/**
             images/**
           target: /root/frontend
+          debug: true
 
       - name: SSH og kør container
         uses: appleboy/ssh-action@master
