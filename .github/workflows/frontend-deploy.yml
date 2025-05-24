@@ -1,0 +1,51 @@
+name: Deploy Frontend to Hetzner
+
+on:
+  push:
+    branches: [ "main" ] # eller fx "frontend-deploy"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v3
+
+      - name: Installer Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Installer dependencies og byg SPA
+        run: |
+          npm install
+          npm run build
+
+      - name: Vis build-folder
+        run: ls -l build/
+
+      - name: Kopier kode + config til server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: |
+            Dockerfile
+            nginx.conf
+            build/**
+          target: /root/frontend
+
+      - name: SSH og kør container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/frontend
+            docker stop frontend || true
+            docker rm frontend || true
+            docker build -t citycut-frontend .
+            docker run -d --name frontend --network citycut-net -p 80:80 citycut-frontend
