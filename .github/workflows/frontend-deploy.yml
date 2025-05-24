@@ -1,31 +1,18 @@
-name: Deploy Frontend to Hetzner
+name: Deploy Static SPA Frontend to Hetzner
 
 on:
   push:
     branches: [ "deploymentHetznerNginx" ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout kode
         uses: actions/checkout@v3
 
-      - name: Installer Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Installer dependencies og byg SPA
-        run: |
-          npm install
-          npm run build
-
-      - name: Vis build-folder
-        run: ls -l build/
-
-      - name: Kopier kode + config til server
+      - name: Kopier frontend-filer til server
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HETZNER_HOST }}
@@ -34,7 +21,14 @@ jobs:
           source: |
             Dockerfile
             nginx.conf
-            build/**
+            index.html
+            app.js
+            style.css
+            admin/**
+            auth/**
+            booking/**
+            misc/**
+            images/**
           target: /root/frontend
 
       - name: SSH og kør container
