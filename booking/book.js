@@ -125,7 +125,7 @@ async function renderTimeslotSelection() {
 
         async function submitBooking(bookingObject) {
             try {
-                const response = await fetch("http://backend:8080/api/v1/booking/", {
+                const response = await fetch("http://157.180.73.234:8080/api/v1/booking/", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

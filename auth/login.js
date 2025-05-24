@@ -30,7 +30,7 @@ export function setupLoginFormEvents() {
             const loginRequest = {email, password}
 
             try {
-                const response = await fetch('http://localhost:8081/api/v1/user/login', {
+                const response = await fetch('http://157.180.73.234:8080/api/v1/user/login', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(loginRequest)
@@ -55,7 +55,7 @@ export function setupLoginFormEvents() {
                         pendingBooking.userID = parseInt(userID);
 
                         try {
-                            const response = await fetch("http://backend:8080/api/v1/booking/", {
+                            const response = await fetch("http://157.180.73.234:8080/api/v1/booking/", {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',

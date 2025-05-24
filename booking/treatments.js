@@ -7,7 +7,7 @@ export default () => {
     <button id="continue-btn">Book</button>    
 </section>`;
 };
-const urlGetAllTreatmentsFromDB = "http://backend:8080/api/v1/treatments"
+const urlGetAllTreatmentsFromDB = "http://157.180.73.234:8080/api/v1/treatments"
 
 async function fetchAndRenderTreatmentsFromDB() {
     const container = document.getElementById("treatmentsContainer")
