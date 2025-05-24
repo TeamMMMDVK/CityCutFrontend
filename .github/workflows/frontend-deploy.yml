@@ -2,7 +2,7 @@ name: Deploy Frontend to Hetzner
 
 on:
   push:
-    branches: [ "main" ] # eller fx "frontend-deploy"
+    branches: [ "Main" ]
 
 jobs:
   build-and-deploy:
