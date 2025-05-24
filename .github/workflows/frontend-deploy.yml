@@ -31,6 +31,10 @@ jobs:
           target: /root/frontend
           debug: true
 
+      - name: Bekræft at nye JS-filer er til stede
+        run: grep -r 'localhost:8081' . || echo "Ingen forekomster fundet"
+
+
       - name: SSH og kør container
         uses: appleboy/ssh-action@master
         with:
@@ -41,5 +45,5 @@ jobs:
             cd /root/frontend
             docker stop frontend || true
             docker rm frontend || true
-            docker build -t citycut-frontend .
+            docker build --no-cache -t citycut-frontend .
             docker run -d --name frontend --network citycut-net -p 80:80 citycut-frontend
