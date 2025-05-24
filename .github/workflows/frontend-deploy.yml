@@ -12,6 +12,9 @@ jobs:
       - name: Checkout kode
         uses: actions/checkout@v3
 
+      - name: Debug – vis filstruktur
+        run: ls -R
+
       - name: Kopier frontend-filer til server
         uses: appleboy/scp-action@v0.1.4
         with:
