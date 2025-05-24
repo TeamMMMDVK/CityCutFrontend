@@ -37,7 +37,7 @@ export async function getAvailableTimeslots(){
     params.append("date", date);
     params.append("stylist", "1");
 
-    const url = `http://localhost:8081/api/v1/timeslots?${params.toString()}`;
+    const url = `http://backend:8080/api/v1/timeslots?${params.toString()}`;
 
     try{
         const response = await fetch(url);

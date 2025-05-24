@@ -8,7 +8,7 @@ export function renderTreatmentSelectionView() {
     </section>
   `;
 
-    fetch("http://localhost:8081/api/v1/treatments")
+    fetch("http://backend:8080/api/v1/treatments")
         .then(res => res.json())
         .then(treatments => {
             const container = document.getElementById("treatment-list");

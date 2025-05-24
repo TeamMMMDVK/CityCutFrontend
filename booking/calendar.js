@@ -25,7 +25,7 @@ async function fetchAvailability(dates) {
     const treatmentIds = JSON.parse(localStorage.getItem('treatments') || '[1,2]');
 
     try {
-        const res = await fetch(`http://localhost:8081/v1/calendar/availability?stylist=${stylistId}`, {
+        const res = await fetch(`http://backend:8080/v1/calendar/availability?stylist=${stylistId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

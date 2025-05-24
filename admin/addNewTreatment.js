@@ -30,7 +30,7 @@ export default function renderAddNewTreatment() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8081/api/v1/treatments', {
+            const response = await fetch('http://backend:8080/api/v1/treatments', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(treatment)
