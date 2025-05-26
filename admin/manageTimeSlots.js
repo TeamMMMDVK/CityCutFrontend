@@ -46,7 +46,7 @@ export function renderTimeSlotManager() {
             endTime: end
         };
 
-        fetch("http://localhost:8081/api/v1/timeslots", {
+        fetch("http://157.180.73.234:8080/api/v1/timeslots", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
@@ -66,7 +66,7 @@ export function renderTimeSlotManager() {
     document.getElementById("add-default-btn").addEventListener("click", () => {
         const day = document.getElementById("day-select").value;
 
-        fetch("http://localhost:8081/api/v1/timeslots/default", {
+        fetch("http://157.180.73.234:8080/api/v1/timeslots/default", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
